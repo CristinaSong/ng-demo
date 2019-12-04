@@ -6,4 +6,7 @@ import { Injectable } from '@angular/core';
 export class HeroService {
 
   constructor() { }
+  changeData(){
+    alert('111111')
+  }
 }
