@@ -1,2 +1,100 @@
-<h2>人员登记系统</h2>
-<button (click)="doSubmit()" class="submit">获取表单的内容</button>
+<h3>{{student}}</h3>
+<div [innerHTML]="h"></div>
+<div [id]='id' [title]='msg'>测试属性</div>
+<!-- *ngFor数据循环 -->
+<ul *ngIf="arr.length>0">
+    <li *ngFor="let item of arr;let i = index">{{item.name}} - {{item.age}} - {{i}}</li>
+</ul>
+<hr>
+<!-- *ngIf 条件判断 -->
+<ul *ngIf="arr.length>1">
+    <li *ngFor="let item of arr;let i = index">{{item.name}} - {{item.age}} - {{i}}</li>
+</ul>
+<hr>
+<ul [ngSwitch]="score">
+    <li *ngSwitchCase="1">已支付</li>
+    <li *ngSwitchCase="2">订单已经确认</li>
+    <li *ngSwitchCase="3">已发货</li>
+    <li *ngSwitchDefault>无效</li>
+</ul>
+<hr>
+<button class="button" (click)="getData()"> 点击按钮触发事件</button>
+<button class="button" (click)="setData()"> 点击按钮设置数据</button>
+<!-- <button (click)="doSubmit()" class="submit">获取表单的内容</button> -->
+<hr>
+<!-- 表单事件 -->
+<input type="text" (keyup)="keyUpFn($event)"/>
+<hr>
+<p>双向数据绑定(注意在app.module.ts中引入:FormsModule)</p>
+<input type="text" [(ngModel)]="inputValue"/> {{inputValue}}
+<hr>
+<!-- [ngClass] -->
+<div [ngClass]="{'red': true, 'blue': false}">
+    这是一个 div
+</div>
+<div [ngClass]="{'red': flag, 'blue': !flag}">
+    这是一个 div
+</div>
+
+<ul>
+    <li *ngFor="let item of list, let i = index"> <span [ngClass]="{'red': i==0}">{{item}}</span></li>
+</ul>
+<!-- [ngStyle]  -->
+<hr>
+<div [ngStyle]="{'background-color':'green'}">你好 ngStyle</div>
+<!-- 使用attr变量不需要引号 -->
+<div [ngStyle]="{'background-color':attr}">你好 ngStyle</div>
+<hr>
+<p>管道：用来对输入的数据进行处理，如大小写转换、数值和日期格式化等</p>
+<p>日期：{{ today | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+<p>转换成大写：{{ str | uppercase }}</p>
+<p>转换成小写：{{ str | lowercase }}</p>
+<!-- {最少整数位数}.{最少小数位数}-{最多小数位数} -->
+<p>保留2~4位小数:{{ num | number:'1.2-4' }}</p>
+<p>
+    JavaScript 对象序列化:{{ { name: 'semlinker' } | json}}
+</p>
+<p>{{ 'semlinker' | slice:0:3 }}</p>
+<!-- Output: sem -->
+<p>
+    管道链：{{ 'semlinker' | slice:0:3 | uppercase }}
+</p>
+<!-- Output: SEM -->
+<hr>
+<p>自定义管道</p>
+<hr>
+<h2>实现一个人员登记表单-案例</h2>
+<div class="people_list">
+        <ul>
+          <li>姓 名：<input type="text" id="username" [(ngModel)]="peopleInfo.username" value="fonm_input" /></li>
+          <li>性 别：
+            <input type="radio" value="1" name="sex" id="sex1" [(ngModel)]="peopleInfo.sex"> <label for="sex1">男 </label>　　　
+            <input type="radio" value="2" name="sex"  id="sex2" [(ngModel)]="peopleInfo.sex"> <label for="sex2">女 </label>
+          </li>
+         <li>
+          城 市：
+            <select name="city" id="city" [(ngModel)]="peopleInfo.city">
+                <option [value]="item" *ngFor="let item of peopleInfo.cityList">{{item}}</option>
+            </select>
+          </li>
+          <li>
+              爱 好：
+              <span *ngFor="let item of peopleInfo.hobby;let key=index;">
+                  <input type="checkbox"  [id]="'check'+key" [(ngModel)]="item.checked"/> <label [for]="'check'+key"> {{item.title}}</label>
+                  &nbsp;&nbsp;
+              </span>
+           </li>
+           <li>
+             备 注：
+             <textarea name="mark" id="mark" cols="30" rows="10" [(ngModel)]="peopleInfo.mark"></textarea>
+           </li>
+        </ul>
+
+        <button (click)="doSubmit()" class="submit">获取表单的内容</button>
+
+        <pre>
+          可选信息：{{peopleInfo | json}}
+        </pre>
+      </div>
+<hr>
+
