@@ -55,4 +55,9 @@ export class TodoComponent implements OnInit {
     }
     return false;
   }
+  public name: string = 'todo组件';
+
+  greeting() {
+    console.log('hello ' + this.name);
+  }
 }

@@ -2,8 +2,12 @@
 <h2>搜索缓存数据</h2>
 <div class="search">
     <input type="text" [(ngModel)]="keyword" />  <button (click)="doSearch()">搜索</button>
-    <hr>
     <ul>
         <li *ngFor="let item of historyList;let key=index;">{{item}}   ------ <button (click)="deleteHistroy(key)">X</button></li>
     </ul>
 </div>
+<hr>
+<div id="box">我是红色的</div>
+<div id="myattr"></div>
+
+<div #myattr></div>
